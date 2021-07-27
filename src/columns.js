@@ -16,6 +16,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
+import SvgIcon from '@material-ui/core/SvgIcon';
+
 
 function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
@@ -58,7 +60,7 @@ export default function SpacingGrid() {
           {[0, 1].map((value) => (
 
             <Grid key={value} item>
-            {value==0?<ListItemText primary="Domains" />:<ListItemText primary="Cool Domains" />}
+            {value==0?<ListItemText primary="Suggested Domains" />:<ListItemText primary="Cool Domains" />}
             
 
               <Paper className={classes.paper} >
@@ -67,22 +69,33 @@ export default function SpacingGrid() {
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Amazin.com" />
+                  <ListItemText primary="Amazøn.com" secondary="Tap to see cost"/>
+                  
                 </ListItem>
                 <ListItem button>
                   <ListItemIcon>
                     <DraftsIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Doraemon.com" />
+                  <ListItemText primary="mårvel.com" secondary="Tap to see cost"/>
                 </ListItem>
               </List>
               <Divider />
               <List component="nav" aria-label="secondary mailbox folders">
                 <ListItem button>
-                  <ListItemText primary="own.com" />
+                <ListItemIcon>
+                <SvgIcon>
+                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </SvgIcon>
+                </ListItemIcon>
+                  <ListItemText primary="øwn.com" secondary="Tap to see cost"/>
                 </ListItem>
                 <ListItemLink href="#simple-list">
-                  <ListItemText primary="Google.com" />
+                <ListItemIcon>
+                <SvgIcon>
+                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </SvgIcon>
+                </ListItemIcon>
+                  <ListItemText primary="gøøgle.com" secondary="Tap to see cost"/>
                 </ListItemLink>
               </List>
               </Paper>
