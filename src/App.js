@@ -30,24 +30,35 @@ function getCoolNames(domain){
   if(domain.includes('o')||domain.includes('O')){
     variants["O"].forEach(v=>{
       names = names + ", "+ domain.replace(/o/g, v);
+      names = names + ", "+ domain.replace(/O/g, v);
     })
   }
 
   if(domain.includes('a')||domain.includes('A')){
     variants["A"].forEach(v=>{
       names = names + ", "+ domain.replace(/a/g, v);
+      names = names + ", "+ domain.replace(/A/g, v);
     })
   }
 
   if(domain.includes('e')||domain.includes('E')){
     variants["E"].forEach(v=>{
       names = names + ", "+ domain.replace(/e/g, v);
+      names = names + ", "+ domain.replace(/E/g, v);
     })
   }
 
   if(domain.includes('i')||domain.includes('I')){
     variants["I"].forEach(v=>{
       names = names + ", "+ domain.replace(/i/g, v);
+      names = names + ", "+ domain.replace(/I/g, v);
+    })
+  }
+
+  if(domain.includes('u')||domain.includes('U')){
+    variants["U"].forEach(v=>{
+      names = names + ", "+ domain.replace(/u/g, v);
+      names = names + ", "+ domain.replace(/U/g, v);
     })
   }
 
