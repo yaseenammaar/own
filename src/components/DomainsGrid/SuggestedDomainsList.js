@@ -29,7 +29,7 @@ function SuggestedDomainsList(props) {
                     <FixedSizeList
                         height={height}
                         width={width}
-                        itemSize={120}
+                        itemSize={70}
                         itemCount={list.length}
                     >
                         {Row}
