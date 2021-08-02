@@ -1,11 +1,11 @@
 import React, {useEffect, useRef} from "react";
 import {CircularProgress, IconButton, InputBase, makeStyles, Paper} from "@material-ui/core";
 import SearchIcon from '@material-ui/icons/Search';
-import useSearchDomain from "../hooks/useSearchDomain";
-import {getDomainNormalSuggestions, isDomainValid} from "../repositories/DomainRepository";
+import useSearchDomain from "../../hooks/useSearchDomain";
+import {getDomainNormalSuggestions, isDomainValid} from "../../repositories/DomainRepository";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {setCoolSuggestions, setNormalSuggestions} from "../redux/actions/domainSuggestionsActions";
+import {setCoolSuggestions, setNormalSuggestions} from "../../redux/actions/domainSuggestionsActions";
 
 const useStyles = makeStyles((theme) => ({
     root: {

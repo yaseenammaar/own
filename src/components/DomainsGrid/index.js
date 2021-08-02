@@ -13,13 +13,13 @@ import Divider from '@material-ui/core/Divider';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import useSearchDomain from "../hooks/useSearchDomain";
-import SearchBar from "./SearchBar";
+import useSearchDomain from "../../hooks/useSearchDomain";
+import SearchBar from "../search/SearchBar";
 import {FixedSizeList} from "react-window";
-import SuggestedDomainsList from "./DomainsGrid/SuggestedDomainsList";
-import CoolDomainsList from "./DomainsGrid/CoolDomainsList";
+import SuggestedDomainsList from "./SuggestedDomainsList";
+import CoolDomainsList from "./CoolDomainsList";
 import {bindActionCreators} from "redux";
-import {setCoolSuggestions, setNormalSuggestions} from "../redux/actions/domainSuggestionsActions";
+import {setCoolSuggestions, setNormalSuggestions} from "../../redux/actions/domainSuggestionsActions";
 import {connect} from "react-redux";
 
 
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SpacingGrid(props) {
+function DomainsGrid(props) {
 
 
   const [spacing, setSpacing] = useState(2)
@@ -111,4 +111,4 @@ const mapDispatchToProps = dispatch => (
     }, dispatch)
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(SpacingGrid)
+export default connect(mapStateToProps, mapDispatchToProps)(DomainsGrid)

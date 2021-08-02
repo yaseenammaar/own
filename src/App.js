@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-import SpacingGrid from './components/columns.js';
+import DomainsGrid from './components/DomainsGrid';
 
 
 function App() {
   return (
-      <SpacingGrid/>
+      <DomainsGrid/>
   );
 }
 
