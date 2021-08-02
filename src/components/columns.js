@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -15,6 +15,12 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import useSearchDomain from "../hooks/useSearchDomain";
 import SearchBar from "./SearchBar";
+import {FixedSizeList} from "react-window";
+import SuggestedDomainsList from "./DomainsGrid/SuggestedDomainsList";
+import CoolDomainsList from "./DomainsGrid/CoolDomainsList";
+import {bindActionCreators} from "redux";
+import {setCoolSuggestions, setNormalSuggestions} from "../redux/actions/domainSuggestionsActions";
+import {connect} from "react-redux";
 
 
 function ListItemLink(props) {
@@ -37,26 +43,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SpacingGrid() {
+function SpacingGrid(props) {
 
 
-  const [spacing, setSpacing] = React.useState(2);
+  const [spacing, setSpacing] = useState(2)
   const classes = useStyles();
 
   const handleChange = (event) => {
     setSpacing(Number(event.target.value));
   };
 
+
+
   return (
 
     <Grid container className={classes.root} spacing={2} justifyContent={"center"}>
-    
-    {/*<form className={classes.root} noValidate autoComplete="off">
-      <TextField id="standard-basic" label="Search Domain" />
-    </form>*/}
 
       <SearchBar
         searchResultChanged={(searchResult) => {
+          const {
+            available,
+            loading,
+            error,
+            domain,
+            suggestedDomainsList,
+            coolDomainsList
+          } = searchResult
 
         }}
       />
@@ -70,40 +82,12 @@ export default function SpacingGrid() {
             
 
               <Paper className={classes.paper} >
-              <List component="nav" aria-label="main mailbox folders">
-                <ListItem button>
-                  <ListItemIcon>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Amazøn.com" secondary="Tap to see cost"/>
-                  
-                </ListItem>
-                <ListItem button>
-                  <ListItemIcon>
-                    <DraftsIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="mårvel.com" secondary="Tap to see cost"/>
-                </ListItem>
-              </List>
-              <Divider />
-              <List component="nav" aria-label="secondary mailbox folders">
-                <ListItem button>
-                <ListItemIcon>
-                <SvgIcon>
-                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-                </SvgIcon>
-                </ListItemIcon>
-                  <ListItemText primary="øwn.com" secondary="Tap to see cost"/>
-                </ListItem>
-                <ListItemLink href="#simple-list">
-                <ListItemIcon>
-                <SvgIcon>
-                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-                </SvgIcon>
-                </ListItemIcon>
-                  <ListItemText primary="gøøgle.com" secondary="Tap to see cost"/>
-                </ListItemLink>
-              </List>
+                {
+                  value === 0?
+                      <SuggestedDomainsList list={props.suggestions.normal}/>
+                      :
+                      <CoolDomainsList  list={props.suggestions.cool}/>
+                }
               </Paper>
             </Grid>
           ))}
@@ -113,3 +97,18 @@ export default function SpacingGrid() {
     </Grid>
   );
 }
+
+const mapStateToProps = (state) => {
+    const {suggestions} = state
+    return {suggestions}
+};
+
+const mapDispatchToProps = dispatch => (
+    bindActionCreators({
+        //all actions come here
+        setCoolSuggestions,
+        setNormalSuggestions
+    }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SpacingGrid)
