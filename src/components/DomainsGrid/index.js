@@ -9,17 +9,12 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import useSearchDomain from "../../hooks/useSearchDomain";
 import SearchBar from "../search/SearchBar";
 import {FixedSizeList} from "react-window";
 import SuggestedDomainsList from "./SuggestedDomainsList";
 import CoolDomainsList from "./CoolDomainsList";
 import {bindActionCreators} from "redux";
-import {setCoolSuggestions, setNormalSuggestions} from "../../redux/actions/domainSuggestionsActions";
+import {setDomainData} from "../../redux/actions/domainActions";
 import {connect} from "react-redux";
 
 
@@ -72,6 +67,30 @@ function DomainsGrid(props) {
 
         }}
       />
+        <div>
+            {
+                props.domain.domain === "" || props.domain.domain == null || props.domain.loading ?
+                    null
+                    :
+                    (
+                        props.domain.error == null?
+                            (
+                                props.domain.isDomainValid ?
+                                    <div>Domain is {props.domain.available? "available" : "not available"}</div>
+                                    :
+                                    <div>Domain is not valid</div>
+                            )
+                            :
+                            (
+                                <div>Some Error came</div>
+                            )
+
+                    )
+
+            }
+        </div>
+
+
     
       <Grid item xs={12}>
         <Grid container justifyContent="center" spacing={6}>
@@ -84,9 +103,9 @@ function DomainsGrid(props) {
               <Paper className={classes.paper} >
                 {
                   value === 0?
-                      <SuggestedDomainsList list={props.suggestions.normal}/>
+                      <SuggestedDomainsList list={props.domain.normalDomainsList}/>
                       :
-                      <CoolDomainsList  list={props.suggestions.cool}/>
+                      <CoolDomainsList  list={props.domain.coolDomainsList}/>
                 }
               </Paper>
             </Grid>
@@ -99,15 +118,14 @@ function DomainsGrid(props) {
 }
 
 const mapStateToProps = (state) => {
-    const {suggestions} = state
-    return {suggestions}
+    const {domain} = state
+    return {domain}
 };
 
 const mapDispatchToProps = dispatch => (
     bindActionCreators({
         //all actions come here
-        setCoolSuggestions,
-        setNormalSuggestions
+        setDomainData
     }, dispatch)
 );
 

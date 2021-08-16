@@ -1,7 +1,0 @@
-const domainSuggestionsConstants = {
-    SET_NORMAL_SUGGESTIONS: "SET_NORMAL_SUGGESTIONS",
-    SET_COOL_SUGGESTIONS: "SET_COOL_SUGGESTIONS",
-    RESET_SUGGESTIONS_DATA_STATE: "RESET_SUGGESTIONS_DATA_STATE"
-}
-
-export default domainSuggestionsConstants

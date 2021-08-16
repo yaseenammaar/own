@@ -16,7 +16,7 @@ function SuggestedDomainsList(props) {
                 <ListItemIcon>
                     <InboxIcon />
                 </ListItemIcon>
-                <ListItemText primary={list[index].domain} secondary="Tap to see cost"/>
+                <ListItemText primary={list[index]} secondary="Tap to see cost"/>
 
             </ListItem>
         </div>

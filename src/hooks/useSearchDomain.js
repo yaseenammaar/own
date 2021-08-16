@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {getCoolNames, getDomainNormalSuggestions} from "../repositories/DomainRepository";
+import {getCoolNames, getDomainNormalSuggestions, getSearchResult} from "../repositories/DomainRepository";
 
 function useSearchDomain() {
     const [searchState, setSearchState] = useState({
         available: false,
         loading: false,
+        isDomainValid: false,
         error: null,
         domain: null,
         suggestedDomainsList: [],
@@ -15,24 +16,6 @@ function useSearchDomain() {
         console.log("useEffect results", searchState)
     }, [searchState])
 
-    const getDomainAvailability = async () => {
-        try {
-            // TODO: availability logic goes here
-
-
-            return {
-                error: null,
-                available: true,  // TODO: make it according to search
-            }
-        }
-        catch (e) {
-            return {
-                error: e,
-                available: false
-            }
-        }
-    }
-
     const searchDomain = async (domain) => {
         setSearchState((prev) => {return {
             ...prev,
@@ -40,19 +23,61 @@ function useSearchDomain() {
             domain: domain
         }})
 
-        const {error, available} = await getDomainAvailability()
-        const suggestionList = await getDomainNormalSuggestions(domain)
-        const coolList = await getCoolNames(domain)
-        console.log("searchDomain function", suggestionList, coolList)
+        const {status, data, isAxiosError, isSuccess} = await getSearchResult(domain)
 
-        setSearchState({
-            ...searchState,
+        let isAvailable
+        let isDomainValid
+        let mError
+        let suggestedDomainsList
+        let coolDomainsList
+
+        if(isSuccess) {
+            const {
+                available,
+                coolDomains,
+                normalDomains
+            } = data
+            isAvailable = available
+            coolDomainsList = coolDomains
+            suggestedDomainsList = normalDomains
+            isDomainValid = true
+            mError = null
+        }
+        else {
+            coolDomainsList = []
+            suggestedDomainsList = []
+            isAvailable = false
+            isDomainValid = false
+
+            if(isAxiosError) {
+                if(status === 422) {
+                    // domain is not valid
+                    mError = null
+                }
+                else {
+                    // some other error from server
+                    console.log("some other error from server")
+                    mError = data.error == null? "" : data.error
+                }
+            }
+            else {
+                // some other error from code other than server
+                console.log("something went wrong")
+                mError = "Something went wrong"
+            }
+        }
+
+        console.log("error res is : ", mError)
+
+        setSearchState((prev) => {return{
+            ...prev,
             loading: false,
-            error: error,
-            available: available,
-            suggestedDomainsList: suggestionList,
-            coolDomainsList: coolList
-        })
+            available: isAvailable,
+            suggestedDomainsList: suggestedDomainsList,
+            coolDomainsList: coolDomainsList,
+            isDomainValid: isDomainValid,
+            error: mError
+        }})
 
         return searchState
     }

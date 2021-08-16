@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import domainSuggestionsReducer from "./reducers/domainSuggestionsReducer";
+import domainReducer from "./reducers/domainReducer";
 
 export default combineReducers({
   //all reducers go here
-  suggestions: domainSuggestionsReducer
+  domain: domainReducer
 })
