@@ -5,7 +5,7 @@ import InboxIcon from "@material-ui/icons/Inbox";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItem from "@material-ui/core/ListItem";
 import AutoSizer from "react-virtualized-auto-sizer";
-
+import BeenhereRoundedIcon from '@material-ui/icons/BeenhereRounded';
 function SuggestedDomainsList(props) {
 
     const { list } = props
@@ -14,7 +14,7 @@ function SuggestedDomainsList(props) {
         <div style={style}>
             <ListItem button>
                 <ListItemIcon>
-                    <InboxIcon />
+                    <BeenhereRoundedIcon style={{ color: '#648dae' }}/>
                 </ListItemIcon>
                 <ListItemText primary={list[index]} secondary="Tap to see cost"/>
 

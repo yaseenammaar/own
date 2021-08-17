@@ -5,6 +5,7 @@ import InboxIcon from "@material-ui/icons/Inbox";
 import ListItemText from "@material-ui/core/ListItemText";
 import {FixedSizeList} from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
+import VerifiedUserRoundedIcon from '@material-ui/icons/VerifiedUserRounded';
 
 function CoolDomainsList(props) {
     const { list } = props
@@ -13,7 +14,7 @@ function CoolDomainsList(props) {
         <div style={style}>
             <ListItem button>
                 <ListItemIcon>
-                    <InboxIcon />
+                    <VerifiedUserRoundedIcon style={{ color: '#3897f0' }}/>
                 </ListItemIcon>
                 <ListItemText primary={list[index]} secondary="Tap to see cost"/>
 

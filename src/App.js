@@ -18,7 +18,7 @@ function App() {
 
   return (
       isInitializingApp ?
-          <div>loading app...</div>
+          <center>Loading...</center>
           :
           <DomainsGrid/>
   );

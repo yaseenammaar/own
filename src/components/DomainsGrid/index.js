@@ -16,6 +16,7 @@ import CoolDomainsList from "./CoolDomainsList";
 import {bindActionCreators} from "redux";
 import {setDomainData} from "../../redux/actions/domainActions";
 import {connect} from "react-redux";
+import Header from "../TopBar/Header";
 
 
 function ListItemLink(props) {
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '1px 3px 5px 30px',
   },
   paper: {
-    height: 340,
+    height: 440,
     width: 500,
   },
   control: {
@@ -52,7 +53,10 @@ function DomainsGrid(props) {
 
   return (
 
+      <>
+  <Header/>
     <Grid container className={classes.root} spacing={2} justifyContent={"center"}>
+      
 
       <SearchBar
         searchResultChanged={(searchResult) => {
@@ -76,9 +80,9 @@ function DomainsGrid(props) {
                         props.domain.error == null?
                             (
                                 props.domain.isDomainValid ?
-                                    <div>Domain is {props.domain.available? "available" : "not available"}</div>
+                                    <div><br/>Domain is {props.domain.available? "available" : "not available"}</div>
                                     :
-                                    <div>Domain is not valid</div>
+                                    <div><br/>Domain is not valid</div>
                             )
                             :
                             (
@@ -97,6 +101,7 @@ function DomainsGrid(props) {
           {[0, 1].map((value) => (
 
             <Grid key={value} item>
+
             {value===0?<ListItemText primary="Suggested Domains" />:<ListItemText primary="Cool Domains" />}
             
 
@@ -114,6 +119,7 @@ function DomainsGrid(props) {
       </Grid>
      
     </Grid>
+    </>
   );
 }
 
