@@ -94,9 +94,9 @@ function DomainsGrid(props) {
             }
         </div>
 
-
-    
-      <Grid item xs={12}>
+{
+  1==0?  (
+    <Grid item xs={12}>
         <Grid container justifyContent="center" spacing={6}>
           {[0, 1].map((value) => (
 
@@ -117,6 +117,11 @@ function DomainsGrid(props) {
           ))}
         </Grid>
       </Grid>
+      ):
+      null
+}
+    
+    
      
     </Grid>
     </>
