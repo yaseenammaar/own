@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Sniff Labs LLC. All rights reserved.
 import { render, screen } from '@testing-library/react';
 import App from './App';
 

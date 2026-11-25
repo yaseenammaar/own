@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Sniff Labs LLC. All rights reserved.
 import './App.css';
 import DomainsGrid from './components/DomainsGrid';
 import {useEffect, useState} from "react";
